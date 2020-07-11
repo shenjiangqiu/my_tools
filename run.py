@@ -41,7 +41,7 @@ def run_task(command):
 
 
 commands = [minisat_path + " " + os.path.join(cnf_root, c) +
-            " 2>&1" + ((" |tail "+tail) if use_tail else " ") + "> result_"+c+".txt" for c in cnfs]
+            " 2>&1" + ((" |tail -n "+tail) if use_tail else " ") + " > result_"+c+".txt" for c in cnfs]
 print("commands are {}".format(commands))
 print("num_cores is  {}".format(numcores))
 
@@ -57,6 +57,6 @@ for cnf_path in cnf_paths:
 if not path_exits:
     exit(-1)
 
-exit(0)
-with Pool(numcores) as p:
+
+with Pool(int(numcores)) as p:
     p.map(run_task, commands)
