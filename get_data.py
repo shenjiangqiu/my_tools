@@ -33,6 +33,9 @@ for file in arg_result.result_files:
     print(file)
     for key in keys:
         print(key,end=" ")
+        if result[file][key]==None or len(result[file][key])==0:
+            print("")
+            continue
         max_num=1
         if is_norm:
             max_num=max(result[file][key])
