@@ -58,9 +58,6 @@ for file in arg_result.result_files:
         print(file)
         for key in keys:
             print(key, end=" ")
-            if result[file][key] == None or len(result[file][key]) == 0:
-                print("")
-                continue
             max_num = 1
             if is_norm:
                 max_num = max(result[file][key])
@@ -68,8 +65,8 @@ for file in arg_result.result_files:
                 max_num = 1
             if num != 0:
                 for number in result[file][key][-num:]:
-                    print(number/max_num, end=" ")
+                    print(number, end=" ")
             else:
                 for number in result[file][key]:
-                    print(number/max_num, end=" ")
+                    print(number, end=" ")
             print("")

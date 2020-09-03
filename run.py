@@ -15,6 +15,7 @@ parser.add_argument("--tail", dest="tail", default=0,
                     help="keep how many lines of the output, 0=unlimited")
 parser.add_argument("--num-core", dest="num_cores", default=4,
                     help="at most use how many cpu cores to run this task")
+parser.add_argument("--args", dest="args", default=None)
 args = parser.parse_args()
 
 numcores = args.num_cores
@@ -40,7 +41,7 @@ def run_task(command):
     subprocess.run(command, shell=True)
 
 
-commands = [minisat_path + " " + os.path.join(cnf_root, c) +
+commands = [minisat_path + " " + (args.args if args.args != None else "")+" " + os.path.join(cnf_root, c) +
             " 2>&1" + ((" |tail -n "+tail) if use_tail else " ") + " > result_"+c+".txt" for c in cnfs]
 print("commands are {}".format(commands))
 print("num_cores is  {}".format(numcores))
